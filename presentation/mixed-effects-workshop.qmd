@@ -1,0 +1,38 @@
+---
+title: "An Introduction to Mixed-Effects Models for Hierarchical Data"
+subtitle: ""
+author:
+  - name: Cole Brookson, MSc
+date: today
+format:
+  beamer:
+    theme: default
+    aspectratio: 169
+    slide-level: 2
+    pdf-engine: xelatex
+    include-in-header: ../assets/beamer-header.tex
+    keep-tex: true
+---
+
+## Free statistical consulting for Yale researchers
+
+\vspace{2.8em}
+
+\begin{center}
+
+\large
+Study design $\cdot$ analysis $\cdot$ visualization $\cdot$ writing.
+
+\vspace{1.4em}
+
+\normalsize
+Walk-ins, appointments, and workshops --- free for all Yale affiliates.
+
+\vspace{2.8em}
+
+\textcolor{statsecondary}{%
+  \large\textbf{library.yale.edu/statlab}%
+}
+
+\end{center}
+
