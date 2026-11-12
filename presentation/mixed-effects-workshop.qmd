@@ -36,3 +36,102 @@ Walk-ins, appointments, and workshops --- free for all Yale affiliates.
 
 \end{center}
 
+## Setup check (you should already have done this!)
+
+```{r}
+#| echo: true
+# install.packages("lme4")
+library(lme4)
+
+nrow(sleepstudy) # should print 180
+
+crop <- read.csv("./data/crop_yield_data.csv")
+crop$farm_id <- factor(crop$farm_id)
+str(crop)
+```
+
+If this doesn't work, please put up a pink sticky note
+
+## Identifying hierarchy: principles and examples 
+
+* What is hierarchy and why does it matter? 
+* How do we detect hierarchy in a dataset as naǐve researchers? 
+* What does hierarchy do to our inference? 
+
+## Fixed vs. Random effects definitions 
+
+Following Gelman (2005):
+
+* **Fixed effects** are the same for every group
+* **Random effects** are allowed to vary from group to group
+
+\vspace{0.5em}
+
+$$
+\alpha_j \sim N(0, \sigma^2_\alpha)
+$$
+
+\vspace{0.3em}
+
+\small Caution: econometric "fixed effects" (a dummy per group) is not what we're talking about!
+
+## "Controlling" for hierarchy and covariance
+
+* When do you need a random effect? 
+* What are your alternatives? 
+  * ignore
+  * average between groups 
+  * dummy per-group
+* How does *not* including one bias things (or not)
+
+## EXERCISE: Identify some structure and what may or may not be fixed and random effects
+
+A plant physiologist wants to know whether cold stress reduces how much $CO_2$ a grass can take up. She collects 12 plants of the same grass species: 6 from Ontario and 6 from Mississippi. Half the plants from each region are chilled overnight and the other half aren't. She then measures $CO_2$ uptake on every plant at 7 different $CO_2$ concentrations, from low to high, for 84 measurements in total.
+
+\vspace{0.5em}
+
+**With your neighbour please discuss:**
+
+1. What's the grouping? How many groups, and how many observations in each?
+2. For each variable (region, chilling, concentration, plant), would you treat it as fixed or random? Why?
+3. Which predictors change *within* a plant, and which only *between* plants?
+4. Could the effect of concentration differ from plant to plant? What about the effect of chilling?
+
+## Example data we'll use
+
+```{r}
+#| label: fig-soil-data
+#| fig-cap: "Simulated data for this example, coloured by farm."
+#| echo: false
+
+library(ggplot2)
+
+ggplot(data = crop) +
+    geom_point(aes(x = soil_pH, y = crop_yield, colour = farm_id)) +
+    theme_bw() +
+    labs(x = "Soil pH", y = "Crop Yield") +
+    scale_colour_manual("Farm ID", values = MoMAColors::moma.colors("OKeeffe"))
+```
+
+## Some intuition on fixed and random effects
+
+** APPLET READOUTS ** 
+
+## I do: null model, then the ICC, then add soil pH, and show fixef + ranef = coef
+
+## Starting with a null model
+
+```{r}
+library(lme4)
+
+m_null <- lmer(crop_yield ~ 1 + (1 | farm_id), data = crop)
+summary(m_null)
+
+vc <- as.data.frame(VarCorr(m_null))
+vc$vcov[1] / sum(vc$vcov) # ICC
+```
+
+
+## We do: `dyestuff` to show shrinkage 
+
+## You do: `

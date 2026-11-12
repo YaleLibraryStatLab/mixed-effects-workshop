@@ -82,6 +82,46 @@
 \setlength{\emergencystretch}{3em} % prevent overfull lines
 \setcounter{secnumdepth}{-\maxdimen} % remove section numbering
 
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{241,243,245}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.40,0.45,0.13}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\BuiltInTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\ExtensionTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.28,0.35,0.67}{#1}}
+\newcommand{\ImportTok}[1]{\textcolor[rgb]{0.00,0.46,0.62}{#1}}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\NormalTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.07,0.07,0.07}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
 
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}\usepackage{longtable,booktabs,array}
@@ -534,7 +574,7 @@
 
 \title{An Introduction to Mixed-Effects Models for Hierarchical Data}
 \author{Cole Brookson, MSc}
-\date{2026-10-19}
+\date{2026-11-04}
 
 \begin{document}
 \frame{\titlepage}
@@ -560,6 +600,194 @@ Walk-ins, appointments, and workshops --- free for all Yale affiliates.
 }
 
 \end{center}
+\end{frame}
+
+\begin{frame}[fragile]{Setup check (you should already have done this!)}
+\phantomsection\label{setup-check-you-should-already-have-done-this}
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# install.packages("lme4")}
+\FunctionTok{library}\NormalTok{(lme4)}
+
+\FunctionTok{nrow}\NormalTok{(sleepstudy) }\CommentTok{\# should print 180}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 180
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{crop }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"./data/crop\_yield\_data.csv"}\NormalTok{)}
+\NormalTok{crop}\SpecialCharTok{$}\NormalTok{farm\_id }\OtherTok{\textless{}{-}} \FunctionTok{factor}\NormalTok{(crop}\SpecialCharTok{$}\NormalTok{farm\_id)}
+\FunctionTok{str}\NormalTok{(crop)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+'data.frame':   71 obs. of  4 variables:
+ $ farm_id   : Factor w/ 5 levels "Farm_01","Farm_02",..: 1 1 1 1 1 1 1 1 1 1 ...
+ $ plot_id   : chr  "Farm_01_plot_01" "Farm_01_plot_02" "Farm_01_plot_03" "Farm_01_plot_04" ...
+ $ soil_pH   : num  7.33 6.86 6.74 7.59 6.77 ...
+ $ crop_yield: num  96.5 92.4 91.3 97.6 94.6 ...
+\end{verbatim}
+
+If this doesn't work, please put up a pink sticky note
+\end{frame}
+
+\begin{frame}{Identifying hierarchy: principles and examples}
+\phantomsection\label{identifying-hierarchy-principles-and-examples}
+\begin{itemize}
+\tightlist
+\item
+  What is hierarchy and why does it matter?
+\item
+  How do we detect hierarchy in a dataset as naǐve researchers?
+\item
+  What does hierarchy do to our inference?
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Fixed vs.~Random effects definitions}
+\phantomsection\label{fixed-vs.-random-effects-definitions}
+Following Gelman (2005):
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Fixed effects} are the same for every group
+\item
+  \textbf{Random effects} are allowed to vary from group to group
+\end{itemize}
+
+\vspace{0.5em}
+
+\[
+\alpha_j \sim N(0, \sigma^2_\alpha)
+\]
+
+\vspace{0.3em}
+
+\small Caution: econometric ``fixed effects'' (a dummy per group) is not
+what we're talking about!
+\end{frame}
+
+\begin{frame}{``Controlling'' for hierarchy and covariance}
+\phantomsection\label{controlling-for-hierarchy-and-covariance}
+\begin{itemize}
+\tightlist
+\item
+  When do you need a random effect?
+\item
+  What are your alternatives?
+
+  \begin{itemize}
+  \tightlist
+  \item
+    ignore
+  \item
+    average between groups
+  \item
+    dummy per-group
+  \end{itemize}
+\item
+  How does \emph{not} including one bias things (or not)
+\end{itemize}
+\end{frame}
+
+\begin{frame}{EXERCISE: Identify some structure and what may or may not
+be fixed and random effects}
+\phantomsection\label{exercise-identify-some-structure-and-what-may-or-may-not-be-fixed-and-random-effects}
+A plant physiologist wants to know whether cold stress reduces how much
+\(CO_2\) a grass can take up. She collects 12 plants of the same grass
+species: 6 from Ontario and 6 from Mississippi. Half the plants from
+each region are chilled overnight and the other half aren't. She then
+measures \(CO_2\) uptake on every plant at 7 different \(CO_2\)
+concentrations, from low to high, for 84 measurements in total.
+
+\vspace{0.5em}
+
+\textbf{With your neighbour please discuss:}
+
+\begin{enumerate}
+\tightlist
+\item
+  What's the grouping? How many groups, and how many observations in
+  each?
+\item
+  For each variable (region, chilling, concentration, plant), would you
+  treat it as fixed or random? Why?
+\item
+  Which predictors change \emph{within} a plant, and which only
+  \emph{between} plants?
+\item
+  Could the effect of concentration differ from plant to plant? What
+  about the effect of chilling?
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Example data we'll use}
+\phantomsection\label{example-data-well-use}
+\begin{figure}
+
+\centering{
+
+\includegraphics{mixed-effects-workshop_files/figure-beamer/fig-soil-data-1.pdf}
+
+}
+
+\caption{\label{fig-soil-data}Simulated data for this example, coloured
+by farm.}
+
+\end{figure}%
+\end{frame}
+
+\begin{frame}{Some intuition on fixed and random effects}
+\phantomsection\label{some-intuition-on-fixed-and-random-effects}
+** APPLET READOUTS **
+\end{frame}
+
+\begin{frame}{I do: null model, then the ICC, then add soil pH, and show
+fixef + ranef = coef}
+\phantomsection\label{i-do-null-model-then-the-icc-then-add-soil-ph-and-show-fixef-ranef-coef}
+\end{frame}
+
+\begin{frame}[fragile]{Starting with a null model}
+\phantomsection\label{starting-with-a-null-model}
+\begin{verbatim}
+Linear mixed model fit by REML ['lmerMod']
+Formula: crop_yield ~ 1 + (1 | farm_id)
+   Data: crop
+
+REML criterion at convergence: 452.3
+
+Scaled residuals: 
+     Min       1Q   Median       3Q      Max 
+-2.25810 -0.55144 -0.07848  0.55207  2.30658 
+
+Random effects:
+ Groups   Name        Variance Std.Dev.
+ farm_id  (Intercept) 177.81   13.335  
+ Residual              27.44    5.238  
+Number of obs: 71, groups:  farm_id, 5
+
+Fixed effects:
+            Estimate Std. Error t value
+(Intercept)   69.370      6.004   11.55
+\end{verbatim}
+
+\begin{verbatim}
+[1] 0.8663144
+\end{verbatim}
+\end{frame}
+
+\begin{frame}{We do: \texttt{dyestuff} to show shrinkage}
+\phantomsection\label{we-do-dyestuff-to-show-shrinkage}
+\end{frame}
+
+\begin{frame}{You do: `}
+\phantomsection\label{you-do}
 \end{frame}
 
 
