@@ -574,7 +574,7 @@
 
 \title{An Introduction to Mixed-Effects Models for Hierarchical Data}
 \author{Cole Brookson, MSc}
-\date{2026-11-04}
+\date{2026-11-15}
 
 \begin{document}
 \frame{\titlepage}
@@ -599,6 +599,7 @@ Walk-ins, appointments, and workshops --- free for all Yale affiliates.
   \large\textbf{library.yale.edu/statlab}%
 }
 
+
 \end{center}
 \end{frame}
 
@@ -619,18 +620,18 @@ Walk-ins, appointments, and workshops --- free for all Yale affiliates.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{crop }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"./data/crop\_yield\_data.csv"}\NormalTok{)}
+\NormalTok{crop }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(here}\SpecialCharTok{::}\FunctionTok{here}\NormalTok{(}\StringTok{"./assets/data/crop\_yield\_data.csv"}\NormalTok{))}
 \NormalTok{crop}\SpecialCharTok{$}\NormalTok{farm\_id }\OtherTok{\textless{}{-}} \FunctionTok{factor}\NormalTok{(crop}\SpecialCharTok{$}\NormalTok{farm\_id)}
 \FunctionTok{str}\NormalTok{(crop)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-'data.frame':   71 obs. of  4 variables:
- $ farm_id   : Factor w/ 5 levels "Farm_01","Farm_02",..: 1 1 1 1 1 1 1 1 1 1 ...
+'data.frame':   185 obs. of  4 variables:
+ $ farm_id   : Factor w/ 15 levels "Farm_01","Farm_02",..: 1 1 1 1 1 1 1 1 1 1 ...
  $ plot_id   : chr  "Farm_01_plot_01" "Farm_01_plot_02" "Farm_01_plot_03" "Farm_01_plot_04" ...
- $ soil_pH   : num  7.33 6.86 6.74 7.59 6.77 ...
- $ crop_yield: num  96.5 92.4 91.3 97.6 94.6 ...
+ $ soil_pH   : num  6.8 5.43 6.12 5.86 7.16 ...
+ $ crop_yield: num  94 79.7 86.6 83.3 97.3 ...
 \end{verbatim}
 
 If this doesn't work, please put up a pink sticky note
@@ -646,6 +647,15 @@ If this doesn't work, please put up a pink sticky note
   How do we detect hierarchy in a dataset as naǐve researchers?
 \item
   What does hierarchy do to our inference?
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Enter the \emph{mixed-effects model}}
+\phantomsection\label{enter-the-mixed-effects-model}
+\begin{itemize}
+\tightlist
+\item
+  what is it? etc
 \end{itemize}
 \end{frame}
 
@@ -696,15 +706,16 @@ what we're talking about!
 \end{itemize}
 \end{frame}
 
-\begin{frame}{EXERCISE: Identify some structure and what may or may not
-be fixed and random effects}
-\phantomsection\label{exercise-identify-some-structure-and-what-may-or-may-not-be-fixed-and-random-effects}
-A plant physiologist wants to know whether cold stress reduces how much
-\(CO_2\) a grass can take up. She collects 12 plants of the same grass
-species: 6 from Ontario and 6 from Mississippi. Half the plants from
-each region are chilled overnight and the other half aren't. She then
-measures \(CO_2\) uptake on every plant at 7 different \(CO_2\)
+\begin{frame}{EXERCISE: Identify structure and fixed vs random effects}
+\phantomsection\label{exercise-identify-structure-and-fixed-vs-random-effects}
+\begin{quote}
+\small A plant physiologist wants to know whether cold stress reduces
+how much \(CO_2\) a grass can take up. She collects 12 plants of the
+same grass species: 6 from Ontario and 6 from Mississippi. Half the
+plants from each region are chilled overnight and the other half aren't.
+She then measures \(CO_2\) uptake on every plant at 7 different \(CO_2\)
 concentrations, from low to high, for 84 measurements in total.
+\end{quote}
 
 \vspace{0.5em}
 
@@ -737,57 +748,283 @@ concentrations, from low to high, for 84 measurements in total.
 
 }
 
-\caption{\label{fig-soil-data}Simulated data for this example, coloured
-by farm.}
+\caption{\label{fig-soil-data}Simulated data for this example. Each farm
+is a different colour}
 
 \end{figure}%
 \end{frame}
 
-\begin{frame}{Some intuition on fixed and random effects}
-\phantomsection\label{some-intuition-on-fixed-and-random-effects}
+\begin{frame}{Some intuition on random effects}
+\phantomsection\label{some-intuition-on-random-effects}
 ** APPLET READOUTS **
 \end{frame}
 
-\begin{frame}{I do: null model, then the ICC, then add soil pH, and show
-fixef + ranef = coef}
-\phantomsection\label{i-do-null-model-then-the-icc-then-add-soil-ph-and-show-fixef-ranef-coef}
+\begin{frame}{Formalism!}
+\phantomsection\label{formalism}
+Let's start with a nice simple model for our data\footnote<.->{\(Y_{ij}\)
+  - crop yield in plots \(i\) nested within farm \(j\). \(x_{ij}\) -
+  soil pH across same.}:
+
+\begin{equation}
+Y_{ij} = \beta_0 + \beta_1 x_{ij} + \epsilon_{ij}
+\end{equation}
+
+\pause
+
+We can now think about adding in a random
+effect\footnote<.->{$\alpha_j$ is the random effect across $j = 1,\ldots,k$ farms.}
+by the following:
+
+\begin{equation}
+Y_{ij} = \beta_0 + \beta_1 x_{ij} + \alpha_j + \epsilon_{ij}
+\end{equation}
+
+\pause
+
+where\footnote<.->{$\epsilon_{ij}$ is our random error}
+
+\begin{equation}
+\epsilon_{ij} \mathop\sim^{i.i.d.} N(0, \sigma^{2})\text{;    } \alpha_j \mathop\sim^{i.i.d.} N(0, \sigma^{2}_{\alpha})
+\end{equation}
 \end{frame}
 
-\begin{frame}[fragile]{Starting with a null model}
-\phantomsection\label{starting-with-a-null-model}
+\begin{frame}{Imagine all we knew was that our yields were taken from
+different farms}
+\phantomsection\label{imagine-all-we-knew-was-that-our-yields-were-taken-from-different-farms}
+\begin{figure}[H]
+
+{\centering \includegraphics{../assets/images/farms.png}
+
+}
+
+\caption{Visual intuition for how our data are clustered}
+
+\end{figure}%
+
+\textbf{How could we figure out how much variance was clustered within
+farms?}
+\end{frame}
+
+\begin{frame}{We can start with just our random effect}
+\phantomsection\label{we-can-start-with-just-our-random-effect}
+Say we didn't know anything about our predictor variables, so our model
+was:
+
+\begin{equation}
+Y_{ij} = \beta_0 + \alpha_j + \epsilon_{ij}
+\end{equation}
+
+\pause
+
+This means that with our simple model, we have the expected value being
+
+\begin{equation}
+\begin{aligned}
+E[\alpha_{j}] &= \uncover<3->{0} \\
+E[Y_{ij}] &= \uncover<3->{\beta_0}
+\end{aligned}
+\end{equation}
+
+\pause
+
+\uncover<4->{
+And the variance is then in turn 
+
+\begin{equation}
+\text{Var}(Y_{ij}) = \sigma_{\alpha}^2 + \sigma^2.
+\end{equation}
+}
+\end{frame}
+
+\begin{frame}{Correlation structure}
+\phantomsection\label{correlation-structure}
+And we get left with this very convenient correlation structure:
+
+\begin{equation}
+\text{Cor}(Y_{ij},Y_{i'j'}) =
+\begin{cases}
+0 & j \neq j' \\
+\sigma^2_{\alpha}/(\sigma^2_{\alpha} + \sigma^2) & j = j',\, i \neq i' \\
+1 & j = j',\, i = i'
+\end{cases}
+\end{equation}
+\end{frame}
+
+\begin{frame}{Correlation structure}
+\phantomsection\label{correlation-structure-1}
+Or, if we return to our model including the fixed effect
+\footnote<.->{This is the same structure, but $\sigma^2_\alpha$, $\sigma^2$ are now variances after accounting for $x$, and so won't take the same values as they would have on the previous slide.}
+\[Y_{ij} = \beta_0 + \beta_1 x_{ij} + \alpha_j + \epsilon_{ij}\]
+
+\begin{equation}
+\text{Cor}(Y_{ij},Y_{i'j'} \mid \mathbf{X}) =
+\begin{cases}
+0 & j \neq j' \\
+\sigma^2_{\alpha}/(\sigma^2_{\alpha} + \sigma^2) & j = j',\, i \neq i' \\
+1 & j = j',\, i = i'
+\end{cases}
+\end{equation}
+
+\pause
+
+\begin{center}
+\textbf{But why does this matter??}
+\end{center}
+
+\pause
+
+\begin{center}
+\textbf{\textcolor{red}{Because this is central to understanding the inference on this outcome of interest!}}
+\end{center}
+\end{frame}
+
+\begin{frame}{This correlation quantity is known as the ICC (intraclass
+correlation)}
+\phantomsection\label{this-correlation-quantity-is-known-as-the-icc-intraclass-correlation}
+\begin{equation}
+ICC = \sigma^2_{\alpha}/(\sigma^2_{\alpha} + \sigma^2)
+\end{equation}
+
+\vspace{10mm}
+
+\begin{center}
+This expression quantifies how much variation comes from \textit{between} farms. If the ICC is large, observations from the \textit{same} farm are much more similar than observations from \textit{different} farms.
+\end{center}
+\end{frame}
+
+\begin{frame}[fragile]{Let's fit a mixed-effects model!}
+\phantomsection\label{lets-fit-a-mixed-effects-model}
+\begin{equation}
+Y_{ij} = \beta_0 + \beta_1 x_{ij} + \alpha_j + \epsilon_{ij}
+\end{equation}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mod }\OtherTok{\textless{}{-}}\NormalTok{ lme4}\SpecialCharTok{::}\FunctionTok{lmer}\NormalTok{(crop\_yield }\SpecialCharTok{\textasciitilde{}}\NormalTok{ soil\_pH }\SpecialCharTok{+}\NormalTok{ (}\DecValTok{1}\SpecialCharTok{|}\NormalTok{farm\_id), }\AttributeTok{data =}\NormalTok{ crop)}
+\end{Highlighting}
+\end{Shaded}
+\end{frame}
+
+\begin{frame}[fragile]{Let's fit a mixed-effects model!}
+\phantomsection\label{lets-fit-a-mixed-effects-model-1}
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
 \begin{verbatim}
 Linear mixed model fit by REML ['lmerMod']
-Formula: crop_yield ~ 1 + (1 | farm_id)
+Formula: crop_yield ~ soil_pH + (1 | farm_id)
    Data: crop
 
-REML criterion at convergence: 452.3
-
-Scaled residuals: 
-     Min       1Q   Median       3Q      Max 
--2.25810 -0.55144 -0.07848  0.55207  2.30658 
+REML criterion at convergence: 970.2
 
 Random effects:
  Groups   Name        Variance Std.Dev.
- farm_id  (Intercept) 177.81   13.335  
- Residual              27.44    5.238  
-Number of obs: 71, groups:  farm_id, 5
+ farm_id  (Intercept) 180.988  13.453  
+ Residual               7.271   2.697  
+Number of obs: 185, groups:  farm_id, 15
 
 Fixed effects:
             Estimate Std. Error t value
-(Intercept)   69.370      6.004   11.55
+(Intercept)  26.9142     3.9787   6.765
+soil_pH       6.0386     0.2984  20.235
 \end{verbatim}
+\end{column}
+
+\begin{column}{0.3\textwidth}
+\vspace{3.5em}
+
+What's going on here? We have:
+
+\begin{enumerate}
+\tightlist
+\item
+  Our model formula
+\item
+  Intercept level variance
+\item
+  Residual variance
+\item
+  Our point estimate (and variance) of our soil pH
+\end{enumerate}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}[fragile]{How should we read this output?}
+\phantomsection\label{how-should-we-read-this-output}
+We can map those back to our equation that we're fitting!
+
+\vspace{0.5em}
+
+\begin{longtable}[]{@{}lll@{}}
+\toprule\noalign{}
+\texttt{lme4} output & Math & Estimate Value \\
+\midrule\noalign{}
+\endhead
+\texttt{farm\_id\ (Intercept)} Variance & \(\sigma^2_\alpha\) &
+180.99 \\
+\texttt{Residual} Variance & \(\sigma^2\) & 7.27 \\
+\texttt{(Intercept)} Estimate & \(\beta_0\) & 26.91 \\
+\texttt{soil\_pH} Estimate & \(\beta_1\) & 6.04 \\
+\bottomrule\noalign{}
+\end{longtable}
+
+\pause
+
+It's important to note here that we are not actually \emph{estimating}
+the intercepts per farm, we're only estimating the two variance
+parameters.
+
+\pause
+
+\begin{center}
+\textbf{\textcolor{red}{But then, where do we get the intercepts from??}}
+\end{center}
+\end{frame}
+
+\begin{frame}[fragile]{So where are the farm intercepts?}
+\phantomsection\label{so-where-are-the-farm-intercepts}
+\emph{{[}TODO: not estimated as parameters; \emph{predicted} afterwards
+from the estimated \(\hat\sigma^2_\alpha\), \(\hat\sigma^2\),
+\(\hat\beta\)s{]}}
+
+\[\hat\alpha_j = \lambda_j \left(\bar y_j - \hat\beta_0 - \hat\beta_1 \bar x_j\right), \qquad
+\lambda_j = \frac{\hat\sigma^2_\alpha}{\hat\sigma^2_\alpha + \hat\sigma^2 / n_j}\]
+
+\pause
+
+\small
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{head}\NormalTok{(}\FunctionTok{ranef}\NormalTok{(mod)}\SpecialCharTok{$}\NormalTok{farm\_id, }\DecValTok{3}\NormalTok{)   }\CommentTok{\# farm deviations, alpha\_j}
+\end{Highlighting}
+\end{Shaded}
 
 \begin{verbatim}
-[1] 0.8663144
+        (Intercept)
+Farm_01   24.856129
+Farm_02    8.682289
+Farm_03  -17.843012
 \end{verbatim}
-\end{frame}
 
-\begin{frame}{We do: \texttt{dyestuff} to show shrinkage}
-\phantomsection\label{we-do-dyestuff-to-show-shrinkage}
-\end{frame}
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{head}\NormalTok{(}\FunctionTok{coef}\NormalTok{(mod)}\SpecialCharTok{$}\NormalTok{farm\_id, }\DecValTok{3}\NormalTok{)    }\CommentTok{\# beta\_0 + alpha\_j, and beta\_1}
+\end{Highlighting}
+\end{Shaded}
 
-\begin{frame}{You do: `}
-\phantomsection\label{you-do}
+\begin{verbatim}
+        (Intercept)  soil_pH
+Farm_01   51.770290 6.038642
+Farm_02   35.596449 6.038642
+Farm_03    9.071148 6.038642
+\end{verbatim}
+
+\normalsize
+
+\emph{{[}TODO: \(\lambda_j\) is between 0 and 1: farms with few plots or
+noisy data get pulled toward the average. We'll see this ``shrinkage''
+later{]}}
 \end{frame}
 
 

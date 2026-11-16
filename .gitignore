@@ -1,3 +1,6 @@
+.vdoc.*
+.quarto/
+
 **.DS_Store
 
 # History files
