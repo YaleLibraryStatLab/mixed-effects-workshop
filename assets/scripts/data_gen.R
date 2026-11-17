@@ -67,20 +67,11 @@ simulate_crop_yield <- function(seed = 123, beta_1 = 6, sigma_b = 2.2) {
     }))
 
     rownames(out) <- NULL
+    out$farm_id <- factor(out$farm_id)
     out
+
 }
 crop_yield_df <- simulate_crop_yield()
 readr::write_csv(crop_yield_df,
     file = here::here("./assets/data/crop_yield_data.csv")
 )
-
-crop_ri <- simulate_crop_yield(beta_1 = 1, sigma_b = 0)
-
-summary(lm(crop_yield ~ soil_pH, data = crop_ri))$coefficients
-summary(lme4::lmer(crop_yield ~ soil_pH + (1 | farm_id), data = crop_ri))$coefficients
-
-
-crop_rs <- simulate_crop_yield(seed = 4) # beta_1 = 6, sigma_b = 2.2
-
-summary(lme4::lmer(crop_yield ~ soil_pH + (1 | farm_id), data = crop_rs))$coefficients
-summary(lme4::lmer(crop_yield ~ soil_pH + (soil_pH | farm_id), data = crop_rs))$coefficients

@@ -1,0 +1,2182 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+  ignorenonframetext,
+  aspectratio=169,
+]{beamer}
+\usepackage{pgfpages}
+\setbeamertemplate{caption}[numbered]
+\setbeamertemplate{caption label separator}{: }
+\setbeamercolor{caption name}{fg=normal text.fg}
+\beamertemplatenavigationsymbolsempty
+% Prevent slide breaks in the middle of a paragraph
+\widowpenalties 1 10000
+\raggedbottom
+\setbeamertemplate{part page}{
+  \centering
+  \begin{beamercolorbox}[sep=16pt,center]{part title}
+    \usebeamerfont{part title}\insertpart\par
+  \end{beamercolorbox}
+}
+\setbeamertemplate{section page}{
+  \centering
+  \begin{beamercolorbox}[sep=12pt,center]{part title}
+    \usebeamerfont{section title}\insertsection\par
+  \end{beamercolorbox}
+}
+\setbeamertemplate{subsection page}{
+  \centering
+  \begin{beamercolorbox}[sep=8pt,center]{part title}
+    \usebeamerfont{subsection title}\insertsubsection\par
+  \end{beamercolorbox}
+}
+\AtBeginPart{
+  \frame{\partpage}
+}
+\AtBeginSection{
+  \ifbibliography
+  \else
+    \frame{\sectionpage}
+  \fi
+}
+\AtBeginSubsection{
+  \frame{\subsectionpage}
+}
+
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\usetheme[]{default}
+\ifPDFTeX\else  
+    % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\newif\ifbibliography
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{241,243,245}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.40,0.45,0.13}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\BuiltInTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\ExtensionTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.28,0.35,0.67}{#1}}
+\newcommand{\ImportTok}[1]{\textcolor[rgb]{0.00,0.46,0.62}{#1}}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\NormalTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.07,0.07,0.07}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+\usepackage{caption}
+% Make caption package work with longtable
+\makeatletter
+\def\fnum@table{\tablename~\thetable}
+\makeatother
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+
+% ============================================================
+% StatLab Beamer Theme — Custom Header
+% Mirrors the color scheme and layout of custom.scss (RevealJS)
+% ============================================================
+
+% ── COLORS (matches custom.scss variables) ───────────────────
+\usepackage{xcolor}
+\usepackage{pifont}
+
+\definecolor{statprimary}{HTML}{2c3e50}    % dark gray-blue (body text)
+\definecolor{statsecondary}{HTML}{2980b9}  % blue (structure, links)
+\definecolor{statyale}{HTML}{00356b}       % Yale blue (footer)
+
+% Box backgrounds
+% Two-color system: Yale blue + statsecondary blue dominate.
+% Orange (#FF6600) reserved for key warnings / key findings only.
+\definecolor{stataccbg}{HTML}{e8f4f8}      % light cyan bg  — default block body
+\definecolor{statorange}{HTML}{FF6600}     % orange         — alert / key finding header
+\definecolor{statorangebg}{HTML}{FFF2E6}   % pale orange bg — alert body
+\definecolor{statexbg}{HTML}{e6eef5}       % pale Yale-blue bg — example / Sam block body
+\definecolor{statproof}{HTML}{95a5a6}      % gray           — proof (rarely used)
+\definecolor{statproofbg}{HTML}{f9f9f9}    % light gray bg
+
+% ── FONT: CMU Serif (LaTeX default) ─────────────────────────
+% Switch Beamer from its default sans-serif to the classic serif.
+\usefonttheme{serif}
+% For XeLaTeX, explicitly select the OpenType CMU Serif face:
+\setmainfont{CMU Serif}
+
+% ── BEAMER COLORS ────────────────────────────────────────────
+
+% Frame chrome
+\setbeamercolor{frametitle}{bg=statprimary, fg=white}
+\setbeamercolor{title}{fg=statprimary}
+\setbeamercolor{subtitle}{fg=statsecondary}
+\setbeamercolor{author}{fg=statprimary!70}
+\setbeamercolor{date}{fg=statprimary!70}
+\setbeamercolor{normal text}{fg=statprimary, bg=white}
+\setbeamercolor{structure}{fg=statsecondary}
+
+% Bullets and lists
+\setbeamercolor{item}{fg=statsecondary}
+\setbeamercolor{subitem}{fg=statsecondary!70}
+\setbeamercolor{enumerate item}{fg=statsecondary}
+\setbeamercolor{enumerate subitem}{fg=statsecondary!70}
+
+% Bullet shape: filled circle (level 1), open circle (level 2), dash (level 3)
+\setbeamertemplate{itemize item}{\small$\bullet$}
+\setbeamertemplate{itemize subitem}{\small$\circ$}
+\setbeamertemplate{itemize subsubitem}{\small\textendash}
+
+% Default block — blue, mirrors .theorem / .lemma / .corollary
+\setbeamercolor{block title}{fg=white, bg=statsecondary}
+\setbeamercolor{block body}{bg=stataccbg, fg=statprimary}
+
+% Alert block — orange (#FF6600), reserved for key warnings / findings
+\setbeamercolor{block title alerted}{fg=white, bg=statorange}
+\setbeamercolor{block body alerted}{bg=statorangebg, fg=statprimary}
+
+% Example block — Yale blue, used for Sam callbacks and contextual examples
+\setbeamercolor{block title example}{fg=white, bg=statyale}
+\setbeamercolor{block body example}{bg=statexbg, fg=statprimary}
+
+% ── FONT SIZES ───────────────────────────────────────────────
+\setbeamerfont{title}{size=\LARGE, series=\bfseries}
+\setbeamerfont{subtitle}{size=\large}
+\setbeamerfont{frametitle}{size=\large, series=\bfseries}
+\setbeamerfont{block title}{size=\normalsize, series=\bfseries}
+\setbeamerfont{footline}{size=\scriptsize}
+
+% ── FRAME TITLE ──────────────────────────────────────────────
+\setbeamertemplate{navigation symbols}{}
+
+\setbeamertemplate{frametitle}{%
+  \nointerlineskip%
+  \begin{beamercolorbox}[%
+    wd=\paperwidth, ht=2.6ex, dp=0.9ex, leftskip=0.9em%
+  ]{frametitle}%
+    \usebeamerfont{frametitle}\insertframetitle%
+  \end{beamercolorbox}%
+}
+
+% ── HEADLINE: presentation title, top-right (hidden on title slide) ──
+\setbeamercolor{headline}{fg=statprimary!55, bg=white}
+\setbeamertemplate{headline}{%
+  \ifnum\insertframenumber>1%
+    \begin{beamercolorbox}[wd=\paperwidth, ht=2.2ex, dp=0.5ex]{headline}%
+      \hfill%
+      \usebeamercolor[fg]{headline}{\fontsize{6.5}{8}\selectfont\inserttitle}%
+      \hspace*{0.9em}%
+    \end{beamercolorbox}%
+  \else%
+    \vspace{2.7ex}% reserve same height on title slide so frame title aligns
+  \fi%
+}
+
+% ── FOOTER: branding + slide number (no logo) ────────────────
+\setbeamertemplate{footline}{%
+  {\color{statprimary!25}\hrule height 0.4pt}%
+  \begin{beamercolorbox}[wd=\paperwidth, ht=2.4ex, dp=1.4ex]{footline}%
+    \hspace*{0.9em}%
+    \textcolor{statyale}{\fontfamily{qpl}\selectfont Yale Library $|$ StatLab}%
+    \hfill%
+    \textcolor{statprimary!50}{\insertframenumber\,/\,\inserttotalframenumber}%
+    \hspace*{0.9em}%
+  \end{beamercolorbox}%
+}
+
+% ── IMAGE CONSTRAINTS ────────────────────────────────────────
+% Keep images within the content area so they never bleed into the footer.
+% max-width = full text column; max-height = 65 % of the frame text height.
+\usepackage{graphicx}
+\setkeys{Gin}{width=\linewidth, height=0.65\textheight, keepaspectratio}
+
+% ── TITLE PAGE ───────────────────────────────────────────────
+\setbeamertemplate{title page}{%
+  \vspace*{2.5em}%
+  \begin{beamercolorbox}[sep=0pt, left]{title}%
+    \usebeamerfont{title}\usebeamercolor[fg]{title}\inserttitle\par%
+  \end{beamercolorbox}%
+  \vspace*{0.5em}%
+  \begin{beamercolorbox}[sep=0pt, left]{subtitle}%
+    \usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par%
+  \end{beamercolorbox}%
+  \vspace*{1.8em}%
+  \begin{beamercolorbox}[sep=0pt, left]{author}%
+    \usebeamerfont{author}\usebeamercolor[fg]{author}\insertauthor\par%
+  \end{beamercolorbox}%
+  \vspace*{0.4em}%
+  \begin{beamercolorbox}[sep=0pt, left]{date}%
+    \usebeamerfont{date}\usebeamercolor[fg]{date}\insertdate\par%
+  \end{beamercolorbox}%
+}
+
+% ── CUSTOM ENVIRONMENTS ──────────────────────────────────────
+% Use these inside raw LaTeX blocks (```{=latex}) in your .qmd.
+% Each mirrors the matching CSS class from the RevealJS theme.
+
+% Definition — Yale blue (consistent with two-color palette)
+\newenvironment{definitionblock}[1][Definition]{%
+  \begingroup%
+  \setbeamercolor{block title}{fg=white, bg=statyale}%
+  \setbeamercolor{block body}{bg=statexbg, fg=statprimary}%
+  \begin{block}{#1}%
+}{%
+  \end{block}%
+  \endgroup%
+}
+
+% Lemma — blue, mirrors .lemma (same as default block)
+\newenvironment{lemmablock}[1][Lemma]{%
+  \begingroup%
+  \begin{block}{#1}%
+}{%
+  \end{block}%
+  \endgroup%
+}
+
+% Corollary — blue, mirrors .corollary (same as default block)
+\newenvironment{corollaryblock}[1][Corollary]{%
+  \begingroup%
+  \begin{block}{#1}%
+}{%
+  \end{block}%
+  \endgroup%
+}
+
+% Proof with QED square — gray, mirrors .proof
+\newenvironment{proofblock}[1][Proof]{%
+  \begingroup%
+  \setbeamercolor{block title}{fg=white, bg=statproof}%
+  \setbeamercolor{block body}{bg=statproofbg, fg=statprimary}%
+  \begin{block}{\textit{#1}}%
+  \itshape%
+}{%
+  \hfill$\square$%
+  \end{block}%
+  \endgroup%
+}
+
+% ── Workshop slide packages ───────────────────────────────────────────────
+\usepackage{listings}
+\usepackage{forest}
+\usepackage{tikz}
+\usetikzlibrary{arrows,arrows.meta,positioning,shapes.geometric,calc}
+\usepackage{booktabs}
+\usepackage{multicol}
+\usepackage{array}
+\usepackage{colortbl}   % \cellcolor / \rowcolor for highlighting table lookups
+
+% ── Workshop color definitions ────────────────────────────────────────────
+% Inline semantic colors (used in tables/code for before/after comparisons)
+\definecolor{errorred}{RGB}{180,30,30}       % red  — bad examples, error states
+\definecolor{highlightgreen}{RGB}{0,130,80}  % green — good examples, cached targets
+\definecolor{commentgray}{RGB}{120,120,120}  % gray — code comments
+\definecolor{warnorange}{RGB}{200,100,0}     % warm orange — string literals in code
+\definecolor{lightblue}{RGB}{220,235,255}    % light blue — tikz fill
+
+% ── Listings: tiny font, StatLab color accents ────────────────────────────
+\lstset{
+  basicstyle=\ttfamily\tiny,
+  breaklines=true,
+  frame=single,
+  framerule=0.4pt,
+  framesep=3pt,
+  xleftmargin=8pt,
+  xrightmargin=4pt,
+  showstringspaces=false,
+  commentstyle=\color{commentgray}\itshape,
+  keywordstyle=\color{statsecondary}\bfseries,
+  stringstyle=\color{warnorange},
+  numbers=left,
+  numberstyle=\tiny\color{gray!60},
+  numbersep=5pt,
+  tabsize=2,
+  aboveskip=3pt,
+  belowskip=3pt,
+}
+
+% ── Forest dirtree style ──────────────────────────────────────────────────
+\forestset{
+  dirtree/.style={
+    for tree={
+      font=\ttfamily\scriptsize,
+      grow'=0,
+      child anchor=west,
+      parent anchor=south,
+      anchor=west,
+      calign=first,
+      inner sep=1pt,
+      outer sep=0pt,
+      edge path={
+        \noexpand\path [draw, \forestoption{edge}]
+        (!u.south west) +(7.5pt,0) |- (.child anchor)
+        \forestoption{edge label};
+      },
+      before typesetting nodes={
+        if n=1{insert before={[,phantom]}}{}
+      },
+      fit=band,
+      before computing xy={l=15pt},
+    },
+  }
+}
+
+% ── Quarto code block font size override ──────────────────────────────────
+% Load fancyvrb explicitly so \DefineVerbatimEnvironment is always available,
+% whether or not pandoc includes code blocks that trigger its auto-load.
+\usepackage{fancyvrb}
+\AtBeginDocument{%
+  % Source code (syntax-highlighted input)
+  \DefineVerbatimEnvironment{Highlighting}{Verbatim}{%
+    commandchars=\\\{\},%
+    fontsize=\small%
+  }%
+  % Printed results (plain verbatim) — matched to the input so a chunk
+  % and its output read at one consistent size.
+  \RecustomVerbatimEnvironment{verbatim}{Verbatim}{fontsize=\small}%
+}
+
+% ── Two-column shorthand colors for code comparisons ─────────────────────
+\newcommand{\badlabel}{{\color{errorred}\textbf{$\boldsymbol{\times}$ Before}}}
+\newcommand{\goodlabel}{{\color{highlightgreen}\textbf{\ding{51}~After}}}
+
+% ── ORR Workshop rebuild macros (2025) ────────────────────────────────────
+
+% Yale blue alias (for \color{yale})
+\colorlet{yale}{statyale}
+
+% Figure placeholder — reserves whitespace and flags human action needed
+\newcommand{\figplaceholder}[1]{%
+  \begin{center}%
+  \fbox{\begin{minipage}{0.82\textwidth}%
+  \centering\vspace{1.4cm}%
+  {\large\color{gray} [FIGURE: #1]}\\[0.3cm]%
+  {\small\color{gray}\itshape See [HUMAN INSTRUCTION] comment in source}%
+  \vspace{1.4cm}%
+  \end{minipage}}%
+  \end{center}%
+}
+
+% Key finding callout (red alert block)
+\newcommand{\findingbox}[1]{%
+  \begin{alertblock}{Key Finding}%
+  #1%
+  \end{alertblock}%
+}
+
+% Title-less callout — example-block coloring, no title bar.
+% Use where a block would otherwise invent a second heading under the frame title.
+\newenvironment{notebox}{%
+  \begin{center}%
+  \begin{minipage}{0.95\textwidth}%
+  \begin{beamercolorbox}[wd=\textwidth, sep=6pt]{block body example}%
+}{%
+  \end{beamercolorbox}%
+  \end{minipage}%
+  \end{center}%
+}
+
+% Inline pain/solution markers
+\newcommand{\pain}[1]{{\color{errorred}\textbf{Problem:}} #1}
+\newcommand{\solutiontag}[1]{{\color{yale}\textbf{Solution:}} #1}
+
+% Parker Lab scenario callback — green example block
+\newcommand{\samcallback}[1]{%
+  \begin{exampleblock}{Parker Lab --- Sam's Problem}%
+  \small #1%
+  \end{exampleblock}%
+}
+
+% ── Named lstlisting styles ────────────────────────────────────────────────
+% Override the global \tiny with \scriptsize for readability on slides.
+
+\lstdefinestyle{Rcode}{%
+  language=R,%
+  basicstyle=\ttfamily\scriptsize,%
+  backgroundcolor=\color{gray!8},%
+  frame=single,%
+  breaklines=true,%
+  breakatwhitespace=false,%
+  showstringspaces=false,%
+  numbers=none,%
+}
+
+\lstdefinestyle{bashcode}{%
+  language=bash,%
+  basicstyle=\ttfamily\scriptsize,%
+  backgroundcolor=\color{gray!8},%
+  frame=single,%
+  breaklines=true,%
+  numbers=none,%
+}
+
+\lstdefinestyle{Pythoncode}{%
+  language=Python,%
+  basicstyle=\ttfamily\scriptsize,%
+  backgroundcolor=\color{gray!8},%
+  frame=single,%
+  breaklines=true,%
+  numbers=none,%
+}
+
+\lstdefinestyle{jsoncode}{%
+  language={},%
+  basicstyle=\ttfamily\scriptsize,%
+  backgroundcolor=\color{gray!8},%
+  frame=single,%
+  breaklines=true,%
+  numbers=none,%
+  morestring=[b]",%
+  stringstyle=\color{warnorange},%
+}
+
+\lstdefinestyle{yamlcode}{%
+  language={},%
+  basicstyle=\ttfamily\scriptsize,%
+  backgroundcolor=\color{gray!8},%
+  frame=single,%
+  breaklines=true,%
+  numbers=none,%
+  morecomment=[l]{\#},%
+  commentstyle=\color{commentgray}\itshape,%
+}
+
+\lstdefinestyle{textcode}{%
+  language={},%
+  basicstyle=\ttfamily\scriptsize,%
+  backgroundcolor=\color{gray!8},%
+  frame=none,%
+  breaklines=true,%
+  numbers=none,%
+}
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\AtBeginDocument{%
+\ifdefined\contentsname
+  \renewcommand*\contentsname{Table of contents}
+\else
+  \newcommand\contentsname{Table of contents}
+\fi
+\ifdefined\listfigurename
+  \renewcommand*\listfigurename{List of Figures}
+\else
+  \newcommand\listfigurename{List of Figures}
+\fi
+\ifdefined\listtablename
+  \renewcommand*\listtablename{List of Tables}
+\else
+  \newcommand\listtablename{List of Tables}
+\fi
+\ifdefined\figurename
+  \renewcommand*\figurename{Figure}
+\else
+  \newcommand\figurename{Figure}
+\fi
+\ifdefined\tablename
+  \renewcommand*\tablename{Table}
+\else
+  \newcommand\tablename{Table}
+\fi
+}
+\@ifpackageloaded{float}{}{\usepackage{float}}
+\floatstyle{ruled}
+\@ifundefined{c@chapter}{\newfloat{codelisting}{h}{lop}}{\newfloat{codelisting}{h}{lop}[chapter]}
+\floatname{codelisting}{Listing}
+\newcommand*\listoflistings{\listof{codelisting}{List of Listings}}
+\makeatother
+\makeatletter
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
+\makeatother
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\usepackage{bookmark}
+
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={An Introduction to Mixed-Effects Models for Hierarchical Data},
+  pdfauthor={Cole Brookson, MSc},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{An Introduction to Mixed-Effects Models for Hierarchical Data}
+\author{Cole Brookson, MSc}
+\date{2026-11-17}
+
+\begin{document}
+\frame{\titlepage}
+
+\begin{frame}{Free statistical consulting for Yale researchers}
+\phantomsection\label{free-statistical-consulting-for-yale-researchers}
+\vspace{2.8em}
+
+\begin{center}
+
+\large
+Study design $\cdot$ analysis $\cdot$ visualization $\cdot$ writing.
+
+\vspace{1.4em}
+
+\normalsize
+Walk-ins, appointments, and workshops --- free for all Yale affiliates.
+
+\vspace{2.8em}
+
+\textcolor{statsecondary}{%
+  \large\textbf{library.yale.edu/statlab}%
+}
+
+
+\end{center}
+\end{frame}
+
+\begin{frame}[fragile]{Setup check}
+\phantomsection\label{setup-check}
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(lme4)}
+\FunctionTok{nrow}\NormalTok{(sleepstudy)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 180
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{crop }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(here}\SpecialCharTok{::}\FunctionTok{here}\NormalTok{(}\StringTok{"./assets/data/crop\_yield\_data.csv"}\NormalTok{))}
+\NormalTok{crop}\SpecialCharTok{$}\NormalTok{farm\_id }\OtherTok{\textless{}{-}} \FunctionTok{factor}\NormalTok{(crop}\SpecialCharTok{$}\NormalTok{farm\_id)}
+\FunctionTok{str}\NormalTok{(crop)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+'data.frame':   185 obs. of  4 variables:
+ $ farm_id   : Factor w/ 15 levels "Farm_01","Farm_02",..: 1 1 1 1 1 1 1 1 1 1 ...
+ $ plot_id   : chr  "Farm_01_plot_01" "Farm_01_plot_02" "Farm_01_plot_03" "Farm_01_plot_04" ...
+ $ soil_pH   : num  6.8 5.43 6.12 5.86 7.16 ...
+ $ crop_yield: num  94 79.7 86.6 83.3 97.3 ...
+\end{verbatim}
+
+If this doesn't work, please let us know!
+\end{frame}
+
+\begin{frame}{Identifying hierarchy: principles and examples}
+\phantomsection\label{identifying-hierarchy-principles-and-examples}
+\begin{itemize}
+\tightlist
+\item
+  Standard statistical methods assume \emph{independence of sampling}
+\item
+  Failure to account for such hierarchy can lead to biased estimates,
+  and both Type-I and Type-II errors
+\item
+  Examples of hierarchy: \pause
+
+  \begin{itemize}
+  \tightlist
+  \item
+    students nested in classrooms (or in schools)
+  \item
+    patients seen by different doctors (and in different hospitals)
+  \item
+    plants grown in different farms, etc.
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Enter the \emph{mixed-effects model}}
+\phantomsection\label{enter-the-mixed-effects-model}
+A \textcolor{blue}{linear mixed-effects model} (or just ``mixed-effects
+model''), is an extension of a standard linear model, with the key
+addition of \textbf{random effects}
+
+These random effects allow for:
+
+\begin{itemize}
+\tightlist
+\item
+  accounting of within-group correlation
+\item
+  inference about group-specific \textit{and} population-level effects
+\end{itemize}
+
+\pause 
+\vspace{5em}
+\begin{center}
+\textbf{We will focus mostly today on accounting for within-group correlation}
+\end{center}
+\end{frame}
+
+\begin{frame}{Fixed vs.~Random effects definitions}
+\phantomsection\label{fixed-vs.-random-effects-definitions}
+Following \href{https://arxiv.org/abs/math/0504499}{Gelman
+(2005)}\footnote<.->{This is an excellent piece worth a read for those
+  interested. Gelman (2005) ``Analysis of variance--why it is more
+  important than ever'' (\emph{The Annals of Statistics})}:
+
+\Large
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Fixed} effects are the effects or coefficients that are
+  identical for all groups in a population
+\item
+  \textbf{Random} effects are those which are allowed to differ from
+  group to group
+\end{itemize}
+
+\vspace{1.5em}
+
+\small Caution: econometric ``fixed effects'' (a dummy per group) is not
+what we're talking about!
+\end{frame}
+
+\begin{frame}{Random effects -- what kinds are there?}
+\phantomsection\label{random-effects-what-kinds-are-there}
+\begin{figure}[H]
+
+{\centering \includegraphics{../assets/images/kinds-of-regression.png}
+
+}
+
+\caption{Some visual intuition for these various kinds of effects}
+
+\end{figure}%
+\end{frame}
+
+\begin{frame}{Fixed or random?!? Some rules of thumb}
+\phantomsection\label{fixed-or-random-some-rules-of-thumb}
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Do you care about these specific levels, or about the
+  variation among them?}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    New drug vs.~placebo: we care about that exact comparison, so
+    \textbf{fixed}.
+  \item
+    These particular 20 classrooms: they stand in for all classrooms, so
+    \textbf{random}.
+  \end{itemize}
+\end{itemize}
+
+\pause
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Would a new study use the \emph{same} levels?}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    A repeat study would compare the same drug and placebo (fixed), but
+    with different doctors, classrooms or patients (random).
+  \end{itemize}
+\end{itemize}
+
+\pause
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{How many levels are there?}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    With fewer than about 5--6 groups, there isn't enough information to
+    estimate a variance, so treat it as fixed.
+  \end{itemize}
+\end{itemize}
+
+\pause
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Is it a continuous predictor you care about} (like a dose, or
+  hours of study)?
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Fixed, though its effect may \emph{vary} by group (more on that
+    soon!)
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Example data - effect of soil pH on crop yield}
+\phantomsection\label{example-data---effect-of-soil-ph-on-crop-yield}
+\begin{figure}[H]
+
+{\centering \includegraphics{../assets/images/farms.png}
+
+}
+
+\caption{Clustered observations within farms.}
+
+\end{figure}%
+
+\begin{center}
+\textbf{
+We end up with a hierarchical data structure where observations within farms \textcolor{red}{cannot} be assumed independent
+}
+\end{center}
+\end{frame}
+
+\begin{frame}[fragile]{Example data we'll use}
+\phantomsection\label{example-data-well-use}
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{crop }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(here}\SpecialCharTok{::}\FunctionTok{here}\NormalTok{(}\StringTok{"./assets/data/crop\_yield\_data.csv"}\NormalTok{))}
+\NormalTok{crop}\SpecialCharTok{$}\NormalTok{farm\_id }\OtherTok{\textless{}{-}} \FunctionTok{factor}\NormalTok{(crop}\SpecialCharTok{$}\NormalTok{farm\_id)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+
+\centering{
+
+\includegraphics{mixed-effects-workshop_files/figure-beamer/fig-soil-data-1.pdf}
+
+}
+
+\caption{\label{fig-soil-data}Simulated data for this example. Each farm
+is a different colour}
+
+\end{figure}%
+\end{frame}
+
+\begin{frame}{Formalism!}
+\phantomsection\label{formalism}
+Let's start with a nice simple model for our data\footnote<.->{\(Y_{ij}\)
+  - crop yield in plots \(i\) nested within farm \(j\). \(x_{ij}\) -
+  soil pH across same.}:
+
+\begin{equation}
+Y_{ij} = \beta_0 + \beta_1 x_{ij} + \epsilon_{ij}
+\end{equation}
+
+\pause
+
+We can now think about adding in a
+\textcolor{red}{random effect}\footnote<2->{$\alpha_j$ is the \textcolor{red}{random effect} across $j = 1,\ldots,k$ farms.}
+by the following:
+
+\begin{equation}
+Y_{ij} = \beta_0 + \beta_1 x_{ij} + \alpha_j + \epsilon_{ij}
+\end{equation}
+
+\pause
+
+where\footnote<3->{$\epsilon_{ij}$ is our random error}
+
+\begin{equation}
+\epsilon_{ij} \mathop\sim^{i.i.d.} N(0, \sigma^{2})\text{;    } \alpha_j \mathop\sim^{i.i.d.} N(0, \sigma^{2}_{\alpha})
+\end{equation}
+\end{frame}
+
+\begin{frame}{Imagine all we knew was that our yields were taken from
+different farms}
+\phantomsection\label{imagine-all-we-knew-was-that-our-yields-were-taken-from-different-farms}
+\begin{figure}[H]
+
+{\centering \includegraphics{../assets/images/farms.png}
+
+}
+
+\caption{Visual intuition for how our data are clustered}
+
+\end{figure}%
+
+\textbf{How could we figure out how much variance was clustered within
+farms?}
+\end{frame}
+
+\begin{frame}{We can start with just our random effect}
+\phantomsection\label{we-can-start-with-just-our-random-effect}
+Say we didn't know anything about our predictor variables, so our model
+was:
+
+\begin{equation}
+Y_{ij} = \beta_0 + \alpha_j + \epsilon_{ij}
+\end{equation}
+
+\pause
+
+This means that with our simple model, we have the expected value being
+
+\begin{equation}
+\begin{aligned}
+E[\alpha_{j}] &= \uncover<3->{0} \\
+E[Y_{ij}] &= \uncover<3->{\beta_0}
+\end{aligned}
+\end{equation}
+
+\pause
+
+\uncover<4->{
+And the variance is then in turn 
+
+\begin{equation}
+\text{Var}(Y_{ij}) = \sigma_{\alpha}^2 + \sigma^2.
+\end{equation}
+}
+\end{frame}
+
+\begin{frame}{Correlation structure}
+\phantomsection\label{correlation-structure}
+And we get left with this very convenient correlation structure:
+
+\begin{equation}
+\text{Cor}(Y_{ij},Y_{i'j'}) =
+\begin{cases}
+0 & j \neq j' \\
+\sigma^2_{\alpha}/(\sigma^2_{\alpha} + \sigma^2) & j = j',\, i \neq i' \\
+1 & j = j',\, i = i'
+\end{cases}
+\end{equation}
+\end{frame}
+
+\begin{frame}{Correlation structure}
+\phantomsection\label{correlation-structure-1}
+Or, if we return to our model including the fixed effect
+\footnote<.->{This is the same structure, but $\sigma^2_\alpha$, $\sigma^2$ are now variances after accounting for $x$, and so won't take the same values as they would have on the previous slide.}
+\[Y_{ij} = \beta_0 + \beta_1 x_{ij} + \alpha_j + \epsilon_{ij}\]
+
+\begin{equation}
+\text{Cor}(Y_{ij},Y_{i'j'} \mid \mathbf{X}) =
+\begin{cases}
+0 & j \neq j' \\
+\sigma^2_{\alpha}/(\sigma^2_{\alpha} + \sigma^2) & j = j',\, i \neq i' \\
+1 & j = j',\, i = i'
+\end{cases}
+\end{equation}
+
+\pause
+
+\begin{center}
+\textbf{But why does this matter??}
+\end{center}
+
+\pause
+
+\begin{center}
+\textbf{\textcolor{red}{Because this is central to understanding the inference on this outcome of interest!}}
+\end{center}
+\end{frame}
+
+\begin{frame}{This correlation quantity is known as the ICC (intraclass
+correlation)}
+\phantomsection\label{this-correlation-quantity-is-known-as-the-icc-intraclass-correlation}
+\begin{equation}
+ICC = \sigma^2_{\alpha}/(\sigma^2_{\alpha} + \sigma^2)
+\end{equation}
+
+\vspace{10mm}
+
+\begin{center}
+This expression quantifies how much variation comes from \textit{between} farms. If the ICC is large, observations from the \textit{same} farm are much more similar than observations from \textit{different} farms.
+\end{center}
+\end{frame}
+
+\begin{frame}[fragile]{Let's fit a mixed-effects model!}
+\phantomsection\label{lets-fit-a-mixed-effects-model}
+\begin{equation}
+Y_{ij} = \beta_0 + \beta_1 x_{ij} + \alpha_j + \epsilon_{ij}
+\end{equation}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mod }\OtherTok{\textless{}{-}}\NormalTok{ lme4}\SpecialCharTok{::}\FunctionTok{lmer}\NormalTok{(crop\_yield }\SpecialCharTok{\textasciitilde{}}\NormalTok{ soil\_pH }\SpecialCharTok{+}\NormalTok{ (}\DecValTok{1}\SpecialCharTok{|}\NormalTok{farm\_id), }\AttributeTok{data =}\NormalTok{ crop)}
+\end{Highlighting}
+\end{Shaded}
+\end{frame}
+
+\begin{frame}[fragile]{Let's fit a mixed-effects model!}
+\phantomsection\label{lets-fit-a-mixed-effects-model-1}
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(mod)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\begin{minipage}{0.8\linewidth}
+\begin{Verbatim}[fontsize=\scriptsize]
+Linear mixed model fit by REML ['lmerMod']
+Formula: crop_yield ~ soil_pH + (1 | farm_id)
+   Data: crop
+
+REML criterion at convergence: 970.2
+
+Scaled residuals: 
+     Min       1Q   Median       3Q      Max 
+-2.57851 -0.64683  0.03801  0.68470  2.62255 
+
+Random effects:
+ Groups   Name        Variance Std.Dev.
+ farm_id  (Intercept) 180.988  13.453  
+ Residual               7.271   2.697  
+Number of obs: 185, groups:  farm_id, 15
+
+Fixed effects:
+            Estimate Std. Error t value
+(Intercept)  26.9142     3.9787   6.765
+soil_pH       6.0386     0.2984  20.235
+\end{Verbatim}
+\end{minipage}\end{center}
+\end{column}
+
+\begin{column}{0.3\textwidth}
+\vspace{3.5em}
+
+What's going on here? We have:
+
+\begin{enumerate}
+\tightlist
+\item
+  Our model formula
+\item
+  Intercept level variance
+\item
+  Residual variance
+\item
+  Our point estimate (and variance) of our soil pH
+\end{enumerate}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}[fragile]{How should we read this output?}
+\phantomsection\label{how-should-we-read-this-output}
+We can map those back to our equation that we're fitting!
+
+\vspace{0.5em}
+
+\begin{longtable}[]{@{}lll@{}}
+\toprule\noalign{}
+\texttt{lme4} output & Math & Estimate Value \\
+\midrule\noalign{}
+\endhead
+\texttt{farm\_id\ (Intercept)} Variance & \(\sigma^2_\alpha\) &
+180.99 \\
+\texttt{Residual} Variance & \(\sigma^2\) & 7.27 \\
+\texttt{(Intercept)} Estimate & \(\beta_0\) & 26.91 \\
+\texttt{soil\_pH} Estimate & \(\beta_1\) & 6.04 \\
+\bottomrule\noalign{}
+\end{longtable}
+
+\pause
+
+It's important to note here that we are not actually \emph{estimating}
+the intercepts per farm, we're only estimating the two variance
+parameters.
+
+\pause
+
+\begin{center}
+\textbf{\textcolor{red}{But then, where do we get the intercepts from??}}
+\end{center}
+\end{frame}
+
+\begin{frame}[fragile]{So where are the farm intercepts?}
+\phantomsection\label{so-where-are-the-farm-intercepts}
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\vspace{2em}
+
+These values are in fact not estimated, but \textbf{predicted} from the
+estimated \(\hat\sigma^2_\alpha\), \(\hat\sigma^2\), \(\hat\beta\)
+
+\begin{equation}
+\begin{aligned}
+\hat\alpha_j &= \lambda_j \times \left(\bar y_j - \hat\beta_0 - \hat\beta_1 \bar x_j\right) \\
+\lambda_j &= \frac{\hat\sigma^2_\alpha}{\hat\sigma^2_\alpha + \hat\sigma^2 / n_j}
+\end{aligned}
+\end{equation}
+\end{column}
+
+\begin{column}{0.48\textwidth}
+\pause
+
+\small
+
+You can find this easily for a given farm:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ranef}\NormalTok{(mod)}\SpecialCharTok{$}\NormalTok{farm\_id[}\StringTok{"Farm\_09"}\NormalTok{, }\DecValTok{1}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] -8.076009
+\end{verbatim}
+
+\pause
+
+This is actually the \emph{deviation} from the average, so we just get
+the expression \(\hat\beta_0 + \hat\alpha_j\) if we want the intercept
+specifically, or we can extract it from code:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{fixef}\NormalTok{(mod)[[}\StringTok{"(Intercept)"}\NormalTok{]] }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 26.91416
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\SpecialCharTok{+} \FunctionTok{ranef}\NormalTok{(mod)}\SpecialCharTok{$}\NormalTok{farm\_id[}\StringTok{"Farm\_09"}\NormalTok{, }\DecValTok{1}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] -8.076009
+\end{verbatim}
+\end{column}
+\end{columns}
+
+\pause
+
+\vspace{2em}
+
+\small
+\begin{center}
+In all cases, $\lambda_j$ is between 0 and 1, where farms with few plots or noisy data get pulled toward the average. Keep this in mind for later!
+\end{center}
+\end{frame}
+
+\begin{frame}[fragile]{Calculating the ICC}
+\phantomsection\label{calculating-the-icc}
+\[ICC = \frac{\sigma^2_\alpha}{\sigma^2_\alpha + \sigma^2}\]
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{vc }\OtherTok{\textless{}{-}} \FunctionTok{as.data.frame}\NormalTok{(}\FunctionTok{VarCorr}\NormalTok{(mod))}
+\NormalTok{vc}\SpecialCharTok{$}\NormalTok{vcov[}\DecValTok{1}\NormalTok{] }\SpecialCharTok{/} \FunctionTok{sum}\NormalTok{(vc}\SpecialCharTok{$}\NormalTok{vcov)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 0.9613754
+\end{verbatim}
+
+\pause
+
+So after accounting for soil pH, about 96\% of variation in yield is
+between farms
+\end{frame}
+
+\begin{frame}[fragile]{Time to do some inference!}
+\phantomsection\label{time-to-do-some-inference}
+\begin{columns}[T]
+\begin{column}{0.6\textwidth}
+Let's look back at our summary here:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{formula}\NormalTok{(mod)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+crop_yield ~ soil_pH + (1 | farm_id)
+\end{verbatim}
+
+\pause
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{coef}\NormalTok{(}\FunctionTok{summary}\NormalTok{(mod))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+             Estimate Std. Error   t value
+(Intercept) 26.914161  3.9786582  6.764632
+soil_pH      6.038642  0.2984208 20.235325
+\end{verbatim}
+\end{column}
+
+\pause
+
+\begin{column}{0.48\textwidth}
+\texttt{lme4} (and other packages) don't give you p-values off the bat,
+because they're just not very well-defined for most mixed models.
+\vspace{1.5em}
+
+\pause
+
+\textbf{Best Option:} confidence intervals
+
+\small
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# profile likelihood}
+\NormalTok{stats}\SpecialCharTok{::}\FunctionTok{confint}\NormalTok{(mod, }\AttributeTok{parm =} \StringTok{"soil\_pH"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+           2.5 %  97.5 %
+soil_pH 5.451931 6.62489
+\end{verbatim}
+\end{column}
+\end{columns}
+
+\center
+
+There are ways of extracting an approximate degree of freedom (and
+therefore a p-value) via the \texttt{lmerTest} package
+\end{frame}
+
+\begin{frame}[fragile]{Interpreting \(\hat\beta_1\)}
+\phantomsection\label{interpreting-hatbeta_1}
+\begin{columns}[T]
+\begin{column}{0.6\textwidth}
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{coef}\NormalTok{(}\FunctionTok{summary}\NormalTok{(mod))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+             Estimate Std. Error   t value
+(Intercept) 26.914161  3.9786582  6.764632
+soil_pH      6.038642  0.2984208 20.235325
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{stats}\SpecialCharTok{::}\FunctionTok{confint}\NormalTok{(mod, }\AttributeTok{parm =} \StringTok{"soil\_pH"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+           2.5 %  97.5 %
+soil_pH 5.451931 6.62489
+\end{verbatim}
+
+\vspace{2em}
+
+\textbf{Within a farm}, plots with one unit higher soil pH have on
+average about \textbf{6 more units of yield}
+\end{column}
+
+\pause
+
+\begin{column}{0.48\textwidth}
+\vspace{4em}
+
+\begin{itemize}
+\tightlist
+\item
+  In our case so far, we're saying this is true for \textbf{every} farm,
+  but that there's some shift in the intercept
+\item
+  Note that with 15 farms, the interval is approximate
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}[fragile]{Interpreting \(\hat\beta_0\) and
+\textbf{centering}}
+\phantomsection\label{interpreting-hatbeta_0-and-centering}
+Because it's the \emph{intercept}, we can also see that
+\(\hat\beta_0 = 26.9\) is the expected yield at \textbf{pH = 0} (far
+outside our data)
+
+\pause
+
+\begin{center}
+\textbf{So we should center our predictor}
+\end{center}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{crop}\SpecialCharTok{$}\NormalTok{pH\_c }\OtherTok{\textless{}{-}}\NormalTok{ crop}\SpecialCharTok{$}\NormalTok{soil\_pH }\SpecialCharTok{{-}} \FunctionTok{mean}\NormalTok{(crop}\SpecialCharTok{$}\NormalTok{soil\_pH)}
+\NormalTok{mod\_c }\OtherTok{\textless{}{-}}\NormalTok{ lme4}\SpecialCharTok{::}\FunctionTok{lmer}\NormalTok{(crop\_yield }\SpecialCharTok{\textasciitilde{}}\NormalTok{ pH\_c }\SpecialCharTok{+}\NormalTok{ (}\DecValTok{1}\SpecialCharTok{|}\NormalTok{farm\_id), }\AttributeTok{data =}\NormalTok{ crop)}
+\NormalTok{lme4}\SpecialCharTok{::}\FunctionTok{fixef}\NormalTok{(mod\_c)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+(Intercept)        pH_c 
+  65.751864    6.038642 
+\end{verbatim}
+
+\pause
+
+Now \(\hat\beta_0\) is the expected yield at \textbf{average pH (6.43)}
+for a typical farm, but our other values don't change!
+\end{frame}
+
+\begin{frame}{What would have happened if we had ignored farm-level
+grouping?}
+\phantomsection\label{what-would-have-happened-if-we-had-ignored-farm-level-grouping}
+Conveniently, we simulated these data, so we can check how well our
+model recovers the true values
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Case 1:} farms differ only in baseline yield (random
+  intercept). True \(\beta_1 = 1\).
+\item
+  \textbf{Case 2:} farms also differ in how they respond to pH.
+\end{itemize}
+
+\pause
+
+\begin{center}
+\textbf{What do you think goes wrong if we leave out the random intercept?}
+\end{center}
+\end{frame}
+
+\begin{frame}[fragile]{What if we ignore a random intercept}
+\phantomsection\label{what-if-we-ignore-a-random-intercept}
+\center
+
+For this example, let's say that the true model is\\
+\[Y_{ij} = \beta_0 + \beta_1 x_{ij} + \alpha_j + \epsilon_{ij}\] with
+\(\beta_1 = 1\), but we don't know that, so we fit:
+
+\[Y_{ij} = \beta_0 + \beta_1 x_{ij} + \epsilon_{ij}\]
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{crop\_ri }\OtherTok{\textless{}{-}} \FunctionTok{simulate\_crop\_yield}\NormalTok{(}\AttributeTok{beta\_1 =} \DecValTok{1}\NormalTok{, }\AttributeTok{sigma\_b =} \DecValTok{0}\NormalTok{)}
+\NormalTok{case1\_lm }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(crop\_yield }\SpecialCharTok{\textasciitilde{}}\NormalTok{ soil\_pH, }\AttributeTok{data =}\NormalTok{ crop\_ri)}
+\FunctionTok{coef}\NormalTok{(case1\_lm)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+(Intercept)     soil_pH 
+ 31.3484112   0.7919047 
+\end{verbatim}
+
+\pause
+
+\begin{center}
+So this looks fine doesn't it?? Let's look at our random effect model
+\end{center}
+\end{frame}
+
+\begin{frame}[fragile]{Now include the random intercept}
+\phantomsection\label{now-include-the-random-intercept}
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{case1\_lm }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(}
+\NormalTok{    crop\_yield }\SpecialCharTok{\textasciitilde{}}\NormalTok{ soil\_pH, }
+    \AttributeTok{data =}\NormalTok{ crop\_ri)}
+\FunctionTok{coef}\NormalTok{(case1\_lm)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+(Intercept)     soil_pH 
+ 31.3484112   0.7919047 
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{case1\_ri }\OtherTok{\textless{}{-}}\NormalTok{ lme4}\SpecialCharTok{::}\FunctionTok{lmer}\NormalTok{(}
+\NormalTok{  crop\_yield }\SpecialCharTok{\textasciitilde{}}\NormalTok{ soil\_pH }\SpecialCharTok{+} 
+\NormalTok{  (}\DecValTok{1} \SpecialCharTok{|}\NormalTok{ farm\_id), }
+  \AttributeTok{data =}\NormalTok{ crop\_ri)}
+\NormalTok{lme4}\SpecialCharTok{::}\FunctionTok{fixef}\NormalTok{(case1\_ri)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+(Intercept)     soil_pH 
+ 32.5206235   0.8064318 
+\end{verbatim}
+
+\vspace{2em}
+\begin{center}
+This looks fine??
+\end{center}
+\end{column}
+
+\pause
+
+\begin{column}{0.48\textwidth}
+\includegraphics{mixed-effects-workshop_files/figure-beamer/unnamed-chunk-20-1.pdf}
+
+\pause
+
+With no random intercept we would have to conclude there is no
+(significant) effect of soil pH on yield!
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Our errors are not always in one direction}
+\phantomsection\label{our-errors-are-not-always-in-one-direction}
+\begin{center}
+If $x$ varies \textit{between} groups (e.g. a treatment given to whole farms), you get 
+\textcolor{red}{false positives}\footnote{For a nice discussion of this, see \href{https://doi.org/10.3389/fpsyg.2011.00074}{Musca et al. (2011)}.}.
+
+\vspace{1em}
+
+If $x$ varies \textit{within} groups (like our pH), you get lost power, and therefore 
+\textcolor{red}{false negatives}.
+\end{center}
+\end{frame}
+
+\begin{frame}{Let's move on to the random slope}
+\phantomsection\label{lets-move-on-to-the-random-slope}
+\center
+
+\includegraphics{mixed-effects-workshop_files/figure-beamer/unnamed-chunk-21-1.pdf}
+
+\center
+
+\textbf{Are these lines parallel? What would the random-intercept model assume?}
+\end{frame}
+
+\begin{frame}{Random slopes}
+\phantomsection\label{random-slopes}
+If we were to bake this new assumption into our model what would that
+look like?
+
+\begin{equation}
+Y_{ij} =
+\textcolor{teal}{\underbrace{(\beta_0 + \alpha_j)}_{\text{farm $j$'s baseline}}}
++ \textcolor{orange}{\underbrace{(\beta_1 + b_j)}_{\text{farm $j$'s response to pH}}}\, x_{ij}
++ \underbrace{\epsilon_{ij}}_{\text{plot-level noise}}
+\end{equation}
+
+\pause
+
+\begin{equation}
+\begin{pmatrix} \alpha_j \\ b_j \end{pmatrix} \sim N\left(
+\begin{pmatrix} 0 \\ 0 \end{pmatrix},
+\begin{pmatrix} \sigma^2_\alpha & \rho\,\sigma_\alpha\sigma_b \\ \rho\,\sigma_\alpha\sigma_b & \sigma^2_b \end{pmatrix}
+\right), \qquad \epsilon_{ij} \sim N(0, \sigma^2)
+\end{equation}
+
+\pause
+
+So our model now has to estimate a few new things here, including
+\(\sigma^2_b\) (how much slopes vary) and \(\rho\) (the correlation
+between the farms intercept deviation and their slope
+deviation)\footnote<.->{\(\rho > 0\): farms with high baselines have
+  steep slopes, \(\rho < 0\): farms with higher baselines have flatter
+  slopes}
+\end{frame}
+
+\begin{frame}[fragile]{Fitting random slopes}
+\phantomsection\label{fitting-random-slopes}
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{m\_rs }\OtherTok{\textless{}{-}}\NormalTok{ lme4}\SpecialCharTok{::}\FunctionTok{lmer}\NormalTok{(crop\_yield }\SpecialCharTok{\textasciitilde{}}\NormalTok{ soil\_pH }\SpecialCharTok{+}\NormalTok{ (soil\_pH }\SpecialCharTok{|}\NormalTok{ farm\_id),}
+             \AttributeTok{data =}\NormalTok{ crop)}
+\end{Highlighting}
+\end{Shaded}
+
+\pause
+
+\begin{center}
+\texttt{(soil\_pH | farm\_id)} reads as: \textbf{the effect of soil pH is allowed to vary by farm}
+\end{center}
+
+\small
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Left of the \texttt{\textbar{}}}: what varies, here the slope
+  for \texttt{soil\_pH} (and the intercept, which is included
+  automatically)
+\item
+  \textbf{Right of the \texttt{\textbar{}}}: the grouping it varies
+  across, here \texttt{farm\_id}
+\item
+  So each farm gets its own intercept \emph{and} its own slope, and
+  \texttt{lme4} also estimates how the two are correlated
+\end{itemize}
+
+\normalsize
+\end{frame}
+
+\begin{frame}[fragile]{Fitting random slopes}
+\phantomsection\label{fitting-random-slopes-1}
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(m\_rs)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\begin{minipage}{0.8\linewidth}
+\begin{Verbatim}[fontsize=\scriptsize]
+Linear mixed model fit by REML ['lmerMod']
+Formula: crop_yield ~ soil_pH + (soil_pH | farm_id)
+   Data: crop
+
+REML criterion at convergence: 903.3
+
+Random effects:
+ Groups   Name        Variance Std.Dev. Corr  
+ farm_id  (Intercept) 62.585   7.911          
+          soil_pH      7.541   2.746    -0.71 
+ Residual              4.568   2.137          
+Number of obs: 185, groups:  farm_id, 15
+
+Fixed effects:
+            Estimate Std. Error t value
+(Intercept)  31.6192     2.7171  11.637
+soil_pH       5.3155     0.7606   6.988
+\end{Verbatim}
+\end{minipage}\end{center}
+\end{frame}
+
+\begin{frame}{Reading the random-slope output}
+\phantomsection\label{reading-the-random-slope-output}
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lcll}
+\hline
+\textbf{Output}\footnotemark & \textbf{Symbol} & \textbf{Value} & \textbf{In words} \\
+\hline
+\texttt{farm\_id (Intercept)} Std.Dev. & $\hat\sigma_\alpha$ & 7.91 & how much farm intercepts vary (at pH = 0) \\
+\texttt{farm\_id soil\_pH} Std.Dev. & $\hat\sigma_b$ & 2.75 & how much farm slopes vary \\
+\texttt{Corr} & $\hat\rho$ & $-0.71$ & intercept--slope correlation (at pH = 0) \\
+\texttt{Residual} Std.Dev. & $\hat\sigma$ & 2.14 & plot-level noise \\
+\texttt{soil\_pH} Estimate & $\hat\beta_1$ & 5.32 & \textbf{average} slope across farms \\
+\hline
+\end{tabular}}
+\end{center}
+\footnotetext{\texttt{lme4} reports both the \textbf{Variance} ($\hat\sigma^2$) and the \textbf{Std.Dev.} ($\hat\sigma$) of each random effect}
+\end{frame}
+
+\begin{frame}[fragile]{Aside: random-effect formulas in R}
+\phantomsection\label{aside-random-effect-formulas-in-r}
+\small All models:
+\(Y_{ij} = \beta_0 + \beta_1 x_{ij} + \text{[random part]} + \epsilon_{ij}\),
+for plot \(i\) on farm \(j\) \normalsize
+
+\vspace{0.5em}
+
+\renewcommand{\arraystretch}{1.35}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{@{}lll c@{}}
+\hline
+\textbf{\texttt{lme4} term} & \textbf{Random part} & \textbf{Meaning} & \textbf{\# variance params} \\
+\hline
+\texttt{(1 | farm)} & $\alpha_j$ & random intercept & 1 \\
+\texttt{(x | farm)} & $\alpha_j + b_j x_{ij}$ & correlated intercept \& slope ($\rho$) & 3 \\
+\texttt{(x || farm)} & $\alpha_j + b_j x_{ij}$ & uncorrelated ($\rho = 0$) & 2 \\
+\texttt{(0 + x | farm)} & $b_j x_{ij}$ & random slope, no random intercept & 1 \\
+\texttt{(x1 + x2 | farm)} & $\alpha_j + b_{1j} x_{1ij} + b_{2j} x_{2ij}$ & two slopes, all correlated & 6 \\
+\texttt{(1 | farm) + (1 | tech)} & $\alpha_j + \gamma_k$ & crossed: technician $k$ & 2 \\
+\texttt{(1 | farm/field)} & $\alpha_j + \gamma_{k(j)}$ & nested: field $k$ within farm $j$ & 2 \\
+\hline
+\end{tabular}}
+
+\vspace{0.8em}
+
+\footnotesize
+
+\textbf{Equivalent forms:} \texttt{(x\ \textbar{}\ farm)} =
+\texttt{(1\ +\ x\ \textbar{}\ farm)};
+\texttt{(x\ \textbar{}\textbar{}\ farm)} =
+\texttt{(1\ \textbar{}\ farm)\ +\ (0\ +\ x\ \textbar{}\ farm)};
+\texttt{(1\ \textbar{}\ farm/field)} =
+\texttt{(1\ \textbar{}\ farm)\ +\ (1\ \textbar{}\ farm:field)}
+
+\texttt{0\ +} (or \texttt{-1\ +}) drops the intercept from that term.
+\texttt{\textbar{}\textbar{}} works only for numeric predictors.
+
+\normalsize
+\end{frame}
+
+\begin{frame}{EXERCISE: what are we looking at?}
+\phantomsection\label{exercise-what-are-we-looking-at}
+\begin{scriptsize}
+\textcolor{blue}{A plant physiologist wants to know whether cold stress reduces how much $CO_2$ a grass can take up. She collects 12 plants of the same grass species, 6 from Quebec and 6 from Mississippi. Half the plants from each region are chilled overnight and the other half aren't. She then measures $CO_2$ uptake on every plant at 7 different $CO_2$ concentrations, from low to high, for 84 measurements in total.}
+\end{scriptsize}
+
+\begin{center}
+\includegraphics{mixed-effects-workshop_files/figure-beamer/unnamed-chunk-25-1.pdf}
+\end{center}
+\end{frame}
+
+\begin{frame}[fragile]{EXERCISE: what are we looking at?}
+\phantomsection\label{exercise-what-are-we-looking-at-1}
+We fit a random intercept \emph{and} a random slope for each plant:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{co2\_rs }\OtherTok{\textless{}{-}}\NormalTok{ lme4}\SpecialCharTok{::}\FunctionTok{lmer}\NormalTok{(uptake }\SpecialCharTok{\textasciitilde{}} \FunctionTok{log}\NormalTok{(conc) }\SpecialCharTok{+}\NormalTok{ Type }\SpecialCharTok{*}\NormalTok{ Treatment }\SpecialCharTok{+}
+\NormalTok{                         (}\FunctionTok{log}\NormalTok{(conc) }\SpecialCharTok{|}\NormalTok{ Plant), }\AttributeTok{data =}\NormalTok{ CO2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+boundary (singular) fit: see help('isSingular')
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{lme4}\SpecialCharTok{::}\FunctionTok{VarCorr}\NormalTok{(co2\_rs)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+ Groups   Name        Std.Dev. Corr   
+ Plant    (Intercept) 14.6762         
+          log(conc)    2.9740  -1.000 
+ Residual              3.8277         
+\end{verbatim}
+
+\textbf{With your neighbour:}
+
+\begin{enumerate}
+\tightlist
+\item
+  Look at the \texttt{Corr} column. Does a correlation of exactly \(-1\)
+  seem believable?
+\item
+  How many plants are we using to estimate these 3 random-effect
+  parameters?
+\item
+  So\ldots{} should we keep the random slope? How would you decide?
+\end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]{EXERCISE: what did we see?}
+\phantomsection\label{exercise-what-did-we-see}
+\begin{itemize}
+\tightlist
+\item
+  Plants clearly differ in their baseline, and the lines aren't quite
+  parallel, so a random slope seems plausible
+\end{itemize}
+
+\pause
+
+\begin{itemize}
+\tightlist
+\item
+  But a correlation of exactly \(-1\) (plus that
+  \texttt{boundary\ (singular)\ fit} message) means the model can't
+  separate the intercept and slope variation. With only \textbf{12
+  plants}, we're asking a lot!
+\end{itemize}
+
+\pause
+
+\begin{itemize}
+\tightlist
+\item
+  Our options: drop the correlation (\texttt{\textbar{}\textbar{}}),
+  drop the slope, or \emph{test} whether we need it\ldots{}
+\end{itemize}
+
+\pause
+
+\begin{center}
+\textbf{\textcolor{red}{...which is exactly where we're headed after the break!}}
+\end{center}
+\end{frame}
+
+\begin{frame}{Break!}
+\phantomsection\label{break}
+\vspace{3em}
+
+\begin{center}
+\Huge Break
+
+\vspace{1.5em}
+
+\normalsize
+We'll take a 5 minute break here! 
+\end{center}
+\end{frame}
+
+\begin{frame}[fragile]{So now, what if we have the wrong random-effects
+structure?}
+\phantomsection\label{so-now-what-if-we-have-the-wrong-random-effects-structure}
+Let's simulate our data again with \(\beta_1 = 6\), and try fitting only
+a random
+intercept\footnote<.->{We chose this simulated dataset (seed 4) to illustrate the problem; in repeated simulations, a random-intercept-only model's interval misses the truth about half the time.}:
+
+\pause
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{crop\_rs }\OtherTok{\textless{}{-}} \FunctionTok{simulate\_crop\_yield}\NormalTok{(}\AttributeTok{seed =} \DecValTok{4}\NormalTok{, }\AttributeTok{beta\_1 =} \DecValTok{6}\NormalTok{)}
+\NormalTok{case2\_ri }\OtherTok{\textless{}{-}}\NormalTok{ lme4}\SpecialCharTok{::}\FunctionTok{lmer}\NormalTok{(crop\_yield }\SpecialCharTok{\textasciitilde{}}\NormalTok{ soil\_pH }\SpecialCharTok{+}\NormalTok{ (}\DecValTok{1} \SpecialCharTok{|}\NormalTok{ farm\_id),}
+                 \AttributeTok{data =}\NormalTok{ crop\_rs)}
+\NormalTok{lme4}\SpecialCharTok{::}\FunctionTok{fixef}\NormalTok{(case2\_ri)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+(Intercept)     soil_pH 
+  32.256010    6.836596 
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{stats}\SpecialCharTok{::}\FunctionTok{confint}\NormalTok{(case2\_ri, }\AttributeTok{parm =} \StringTok{"soil\_pH"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+           2.5 %   97.5 %
+soil_pH 6.319677 7.351052
+\end{verbatim}
+
+\pause
+
+\begin{center}
+Hm! Not very accurate...
+\end{center}
+\end{frame}
+
+\begin{frame}[fragile]{Let's now try including the random slope}
+\phantomsection\label{lets-now-try-including-the-random-slope}
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{case2\_rs }\OtherTok{\textless{}{-}}\NormalTok{ lme4}\SpecialCharTok{::}\FunctionTok{lmer}\NormalTok{(crop\_yield }\SpecialCharTok{\textasciitilde{}}\NormalTok{ soil\_pH }\SpecialCharTok{+}
+\NormalTok{                     (soil\_pH }\SpecialCharTok{|}\NormalTok{ farm\_id), }\AttributeTok{data =}\NormalTok{ crop\_rs)}
+\NormalTok{lme4}\SpecialCharTok{::}\FunctionTok{fixef}\NormalTok{(case2\_rs)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+(Intercept)     soil_pH 
+  34.460600    6.510174 
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{confint}\NormalTok{(case2\_rs, }\AttributeTok{parm =} \StringTok{"soil\_pH"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+           2.5 %  97.5 %
+soil_pH 5.368176 7.64502
+\end{verbatim}
+
+\pause
+
+\begin{center}
+This is better! We can see that the interval is wider, but it contains the true value, which is what we want
+\end{center}
+\end{frame}
+
+\begin{frame}{Side by side}
+\phantomsection\label{side-by-side}
+\center
+
+\includegraphics{mixed-effects-workshop_files/figure-beamer/unnamed-chunk-29-1.pdf}
+\end{frame}
+
+\begin{frame}{Is mixed-effects the only option??}
+\phantomsection\label{is-mixed-effects-the-only-option}
+We've talked about how to use \emph{random effects} to handle hierarchy,
+to get proper/correct estimates of our \emph{fixed effects}, the ``happy
+medium'':
+
+\pause
+
+\small
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Complete pooling} (ignore farms): All just come from one
+  regression \[Y_{ij} = \beta_0 + \beta_1 x_{ij} + \epsilon_{ij}\]
+\end{itemize}
+
+\pause
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{No pooling} (a separate regression per farm): No sharing of
+  information!
+  \[Y_{ij} = \beta_{0j} + \beta_{1j} x_{ij} + \epsilon_{ij}\]
+\end{itemize}
+
+\scriptsize
+
+\textcolor{red}{This isn't always a bad option! Esp. if you have only a few groups, you only care about the groups (e.g. THESE farms, not farms in general), or the grouping is confounded with your predictor.}
+\normalsize . . .
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Partial pooling} (mixed model): We allow farms to differ, but
+  are drawn from a common distribution
+  \[Y_{ij} = (\beta_0 + \alpha_j) + (\beta_1 + b_j)\, x_{ij} + \epsilon_{ij}\]
+\end{itemize}
+
+\normalsize
+\end{frame}
+
+\begin{frame}{Shrinkage: the mixed model borrows strength}
+\phantomsection\label{shrinkage-the-mixed-model-borrows-strength}
+\includegraphics{mixed-effects-workshop_files/figure-beamer/unnamed-chunk-30-1.pdf}
+
+\begin{center}
+This \textit{partial pooling} allows our estimates to be pulled towards the average if they are noisy or have few data points
+\end{center}
+\end{frame}
+
+\begin{frame}[fragile]{Visualizing the random effects}
+\phantomsection\label{visualizing-the-random-effects}
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{lattice}\SpecialCharTok{::}\FunctionTok{dotplot}\NormalTok{(lme4}\SpecialCharTok{::}\FunctionTok{ranef}\NormalTok{(m\_rs, }\AttributeTok{condVar =} \ConstantTok{TRUE}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}
+\includegraphics{mixed-effects-workshop_files/figure-beamer/unnamed-chunk-32-1.pdf}
+\end{center}
+
+\begin{center}
+Here we can see each farm's estimated deviation from the average intercept and slope, with uncertainty
+\end{center}
+\end{frame}
+
+\begin{frame}{Testing random effects: two questions}
+\phantomsection\label{testing-random-effects-two-questions}
+\begin{enumerate}
+\tightlist
+\item
+  Is there any between-farm variation at all?
+  \(\;H_0: \sigma^2_\alpha = 0\)
+\item
+  Do farms differ in their response to pH? \(\;H_0: \sigma^2_b = 0\)
+\end{enumerate}
+
+\pause
+
+\vspace{5em}
+
+\begin{center}
+We have a small numerical problem here, in that a \textbf{variance cannot be negative}, so our $H_0$ is kind of on a ``boundary'' of our parameter space, and we can't use a standard $\chi^2$ distribution as our reference
+\end{center}
+\end{frame}
+
+\begin{frame}[fragile]{Question 1: is there any farm variance?}
+\phantomsection\label{question-1-is-there-any-farm-variance}
+\small
+
+We can use a \textcolor{blue}{Likelihood ratio test}, \texttt{lm} vs
+random-intercept model:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# fit both models}
+\NormalTok{m0 }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(crop\_yield }\SpecialCharTok{\textasciitilde{}}\NormalTok{ soil\_pH, }\AttributeTok{data =}\NormalTok{ crop)}
+\NormalTok{m1\_ml }\OtherTok{\textless{}{-}} \FunctionTok{lmer}\NormalTok{(crop\_yield }\SpecialCharTok{\textasciitilde{}}\NormalTok{ soil\_pH }\SpecialCharTok{+}\NormalTok{ (}\DecValTok{1} \SpecialCharTok{|}\NormalTok{ farm\_id),}
+              \AttributeTok{data =}\NormalTok{ crop, }\AttributeTok{REML =} \ConstantTok{FALSE}\NormalTok{)}
+\CommentTok{\# manually calculate the likelihood ratio}
+\NormalTok{lrt }\OtherTok{\textless{}{-}} \FunctionTok{as.numeric}\NormalTok{(}\DecValTok{2} \SpecialCharTok{*}\NormalTok{ (}\FunctionTok{logLik}\NormalTok{(m1\_ml) }\SpecialCharTok{{-}} \FunctionTok{logLik}\NormalTok{(m0)))}
+\CommentTok{\# halve the usual p{-}value to correct for the boundary problem}
+\FloatTok{0.5} \SpecialCharTok{*} \FunctionTok{pchisq}\NormalTok{(lrt, }\AttributeTok{df =} \DecValTok{1}\NormalTok{, }\AttributeTok{lower.tail =} \ConstantTok{FALSE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\pause
+
+\begin{verbatim}
+[1] 5.333457e-115
+\end{verbatim}
+
+\pause
+
+The p-value is tiny here because farm differences are \textbf{huge} (ICC
+about 0.96)
+\end{frame}
+
+\begin{frame}[fragile]{Question 2: do we need the random slope?}
+\phantomsection\label{question-2-do-we-need-the-random-slope}
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# same fixed effects, so compare the REML fits}
+\FunctionTok{anova}\NormalTok{(mod, m\_rs, }\AttributeTok{refit =} \ConstantTok{FALSE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Data: crop
+Models:
+mod: crop_yield ~ soil_pH + (1 | farm_id)
+m_rs: crop_yield ~ soil_pH + (soil_pH | farm_id)
+     npar    AIC    BIC  logLik -2*log(L)  Chisq Df Pr(>Chisq)    
+mod     4 978.16 991.04 -485.08    970.16                         
+m_rs    6 915.28 934.60 -451.64    903.28 66.885  2  2.993e-15 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+\end{verbatim}
+
+\normalsize
+
+\pause
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Df = 2}: the slope adds two parameters, \(\sigma^2_b\) and
+  \(\rho\)
+\item
+  \textbf{AIC}: fit, penalized for the number of parameters. Lower is
+  better!
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Question 2: so which number do we trust?}
+\phantomsection\label{question-2-so-which-number-do-we-trust}
+The p-value here is not a great way to decide between models,
+particularly in close cases. A variance can't go below zero, so the
+usual \(\chi^2\) reference distribution is wrong, and your p-value is
+going to be too big!
+
+\pause
+
+There are fixes: boundary-corrected mixtures, exact tests
+(\texttt{RLRsim}), parametric bootstraps (\texttt{pbkrtest})\ldots{} but
+for now,
+
+\begin{center}
+\textbf{A nice easy rule of thumb: compare AIC}
+\end{center}
+
+\begin{itemize}
+\tightlist
+\item
+  Lower AIC is better, and a difference of more than about \textbf{2} is
+  worth taking seriously
+\item
+  Here: \(978 - 915 = 63\), so the random slope wins easily
+\end{itemize}
+
+\pause
+
+\begin{center}
+\small
+Whatever you use, weigh it alongside your study design, and whether the fit is singular
+\end{center}
+\end{frame}
+
+\begin{frame}[fragile]{How should you choose a random-effects
+structure?}
+\phantomsection\label{how-should-you-choose-a-random-effects-structure}
+There's no single right answer here, and people disagree! There are two
+broad schools of thought:
+
+\pause
+
+\begin{itemize}
+\item
+  \textbf{``Keep it maximal''} (Barr et al.~2013\footnote<.->{Barr, Dale
+    J, Roger Levy, Christoph Scheepers, and Harry J Tily. 2013. ``Random
+    Effects Structure for Confirmatory Hypothesis Testing: Keep It
+    Maximal.'' J. Mem. Lang. 68 (3): 255--78.}): include every random
+  effect your \emph{study design} justifies. If pH varies within farms,
+  include a random slope for pH. This protects you against the
+  overconfidence we saw in Case 2.
+\item
+  \textbf{``Keep it parsimonious''} (Bates et al.~2015\footnote<.->{Bates,
+    D., Kliegl, R., Vasishth, S., \& Baayen, H. (2015). Parsimonious
+    mixed models. arXiv preprint arXiv:1506.04967.}): drop random
+  effects the data can't support. Overly complex models lose power and
+  often don't converge (remember the \texttt{CO2} exercise?).
+\end{itemize}
+
+\pause
+
+\begin{center}
+\textcolor{red}{\textbf{In practice:} start from the design, simplify when the fit is singular, and \textbf{report what you did and why}}
+\end{center}
+\end{frame}
+
+\begin{frame}{Assumptions of the mixed model}
+\phantomsection\label{assumptions-of-the-mixed-model}
+\[Y_{ij} = (\beta_0 + \alpha_j) + (\beta_1 + b_j)\, x_{ij} + \epsilon_{ij}\]
+
+Just like a regular linear regression, there are a few things we're
+assuming here:
+
+\small
+
+\begin{enumerate}
+\tightlist
+\item
+  \textbf{Linearity:} within each farm, yield changes linearly with pH.
+  \emph{Check: residuals vs fitted values (no curves)}
+\item
+  \textbf{Residuals} \(\epsilon_{ij} \sim N(0, \sigma^2)\), with
+  \textbf{constant variance}. \emph{Check: QQ plot of residuals;
+  residuals vs fitted (no funnels); similar spread for every farm}
+\item
+  \textbf{Random effects are normal:} the \(\alpha_j\) and \(b_j\) come
+  from a normal distribution. \emph{Check: QQ plot of the predicted
+  random effects}
+\item
+  \textbf{Independence:} farms are independent of each other, and the
+  random effects are unrelated to \(x\). \emph{Check: mostly comes from
+  your study design}
+\end{enumerate}
+
+\normalsize
+\end{frame}
+
+\begin{frame}[fragile]{Checking residuals}
+\phantomsection\label{checking-residuals}
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(m\_rs)                      }\CommentTok{\# residuals vs fitted}
+\FunctionTok{qqnorm}\NormalTok{(}\FunctionTok{resid}\NormalTok{(m\_rs)); }\FunctionTok{qqline}\NormalTok{(}\FunctionTok{resid}\NormalTok{(m\_rs))}
+\FunctionTok{plot}\NormalTok{(m\_rs, farm\_id }\SpecialCharTok{\textasciitilde{}} \FunctionTok{resid}\NormalTok{(.))  }\CommentTok{\# spread by farm}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{mixed-effects-workshop_files/figure-beamer/unnamed-chunk-39-1.pdf}
+
+\begin{center}
+\footnotesize
+We want a shapeless cloud around 0, points along the QQ line, and similar spread for every farm. A \textbf{funnel} means the variance changes with the fitted values; a \textbf{curve} means we're missing some non-linearity.
+\end{center}
+\end{frame}
+
+\begin{frame}[fragile]{Common mis-specification: singular fits}
+\phantomsection\label{common-mis-specification-singular-fits}
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{three }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"Farm\_01"}\NormalTok{, }\StringTok{"Farm\_02"}\NormalTok{, }\StringTok{"Farm\_03"}\NormalTok{)}
+\NormalTok{crop\_3 }\OtherTok{\textless{}{-}} \FunctionTok{droplevels}\NormalTok{(}\FunctionTok{subset}\NormalTok{(crop, farm\_id }\SpecialCharTok{\%in\%}\NormalTok{ three))}
+\NormalTok{m\_small }\OtherTok{\textless{}{-}} \FunctionTok{lmer}\NormalTok{(crop\_yield }\SpecialCharTok{\textasciitilde{}}\NormalTok{ soil\_pH }\SpecialCharTok{+}
+\NormalTok{                    (soil\_pH }\SpecialCharTok{|}\NormalTok{ farm\_id), }\AttributeTok{data =}\NormalTok{ crop\_3)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+boundary (singular) fit: see help('isSingular')
+\end{verbatim}
+
+\scriptsize
+
+\pause
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{VarCorr}\NormalTok{(m\_small)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+ Groups   Name        Std.Dev. Corr   
+ farm_id  (Intercept) 15.2236         
+          soil_pH      5.6823  -1.000 
+ Residual              1.7687         
+\end{verbatim}
+
+\normalsize
+
+\pause
+
+\begin{center}
+\small
+A correlation of exactly $\pm 1$ (or a variance of 0) means the data can't support this structure: we're asking for 3 random-effect parameters from \textbf{3 farms}! Our options are to simplify (\texttt{||}, or drop the slope), collect more groups, or treat farm as a fixed effect.
+\end{center}
+\end{frame}
+
+\begin{frame}{Wrapping up}
+\phantomsection\label{wrapping-up}
+\begin{itemize}
+\tightlist
+\item
+  Look for \textbf{grouping} in your data, and ask whether your
+  predictors vary \emph{within} or \emph{between} groups
+\end{itemize}
+
+\pause
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Random intercepts} let groups differ in their baseline, and
+  the ICC tells you how much
+\end{itemize}
+
+\pause
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Random slopes} let groups differ in their response, and
+  leaving them out can give you confidently wrong answers
+\end{itemize}
+
+\pause
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Test random effects carefully} (remember the boundary!), and
+  compare REML fits when only the random effects differ
+\end{itemize}
+
+\pause
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Check your assumptions}, and watch out for singular fits and
+  confounding
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Take-home exercise: the cold-stressed grass,
+start to finish}
+\phantomsection\label{take-home-exercise-the-cold-stressed-grass-start-to-finish}
+The full analysis of the \texttt{CO2} data is waiting for you in
+\texttt{scripts/co2\_take\_home.R}. Fill in the blanks, working from top
+to bottom: every step ends with a check, so you'll know right away if
+something's off.
+
+\small
+
+\begin{enumerate}
+\tightlist
+\item
+  Meet the data and plot it
+\item
+  Fit a random-intercept model, and work out what chilling does in each
+  region
+\item
+  Calculate the ICC
+\item
+  Add a random slope (and deal with what happens!)
+\item
+  Test whether the slope is needed, and check the assumptions
+\item
+  See what happens to the standard errors if you ignore the plants
+  entirely
+\end{enumerate}
+
+\normalsize
+\end{frame}
+
+\begin{frame}{Please fill out our feedback survey}
+\phantomsection\label{please-fill-out-our-feedback-survey}
+\begin{figure}[H]
+
+{\centering \includegraphics{"../assets/images/feedback.png"}
+
+}
+
+\caption{Please fill out our feedback form!}
+
+\end{figure}%
+\end{frame}
+
+
+
+\end{document}
